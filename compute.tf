@@ -64,12 +64,12 @@ resource "aws_instance" "ant_main" {
 # }
 
 # we only want ansible to run once after ALL aws_instance(s) in ant_main are created, therefore use a null_resource
-resource "null_resource" "grafana_install" {
-  depends_on = [aws_instance.ant_main]
-  provisioner "local-exec" {
-    command = "ansible-playbook -i aws_hosts --key-file /home/ubuntu/.ssh/antkey playbooks/main-playbook.yml"
-  }
-}
+# resource "null_resource" "grafana_install" {
+#   depends_on = [aws_instance.ant_main]
+#   provisioner "local-exec" {
+#     command = "ansible-playbook -i aws_hosts --key-file /home/ubuntu/.ssh/antkey playbooks/main-playbook.yml"
+#   }
+# }
 
 output "grafana_access" {
   value = { for i in aws_instance.ant_main[*] : i.tags.Name => "${i.public_ip}:3000" }
