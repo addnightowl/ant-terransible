@@ -39,7 +39,8 @@ resource "aws_instance" "ant_main" {
 
   # provisioners use "-" not "_".
   provisioner "local-exec" {
-    command = "printf '\n${self.public_ip}' >> aws_hosts && aws ec2 wait instance-status-ok --instance-ids ${self.id} --region us-west-1"
+    command = "printf '\n${self.public_ip}' >> aws_hosts"
+    # command = "printf '\n${self.public_ip}' >> aws_hosts && aws ec2 wait instance-status-ok --instance-ids ${self.id} --region us-west-1"
   }
   # you have to destroy everything for a destroy provisioner to work.
   provisioner "local-exec" {
