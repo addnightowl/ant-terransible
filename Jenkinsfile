@@ -13,16 +13,16 @@ pipeline {
         sh 'terraform init -no-color'
       }
     }
-    
-    
     stage('Plan') {
       steps {
         sh 'terraform plan -no-color -var-file="$BRANCH_NAME.tfvars"'
       }
     }
-    
-    
     stage('Validate Apply') {
+      when {
+        beforeInput true
+        branch "dev"
+      }
       input {
         message "Do you want to apply this plan?"
         ok "Apply this plan."
@@ -31,23 +31,21 @@ pipeline {
         echo 'Apply Accepted'
       }
     }
-    
-    
     stage('Apply') {
       steps {
         sh 'terraform apply -auto-approve -no-color -var-file="$BRANCH_NAME.tfvars"'
       }
     }
-    
-    
     stage('Ec2 Wait') {
       steps {
         sh 'aws ec2 wait instance-status-ok --region us-west-1'
       }
     }
-    
-    
     stage('Validate Ansible') {
+      when {
+        beforeInput true
+        branch "dev"
+      }
       input {
         message "Do you want to run Ansible?"
         ok "Run Ansible!"
@@ -56,15 +54,11 @@ pipeline {
         echo 'Ansible Accepted'
       }
     }
-    
-    
     stage('Ansible') {
       steps {
         ansiblePlaybook(credentialsId: 'ec2-ssh-key', inventory: 'aws_hosts', playbook: 'playbooks/main-playbook.yml')
       }
     }
-    
-    
     stage('Validate Destroy') {
       input {
         message "Do you want DESTROY ALL things?"
@@ -74,8 +68,6 @@ pipeline {
         echo 'Destroy Accepted'
       }
     }
-    
-    
     stage('Destroy') {
       steps {
         sh 'terraform destroy -auto-approve -no-color -var-file="$BRANCH_NAME.tfvars"'
