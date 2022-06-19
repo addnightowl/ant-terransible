@@ -45,7 +45,9 @@ pipeline {
     }
     stage('Inventory') {
       steps {
-        sh 'printf "\\n$(terraform output -json instance_ips | jq -r \'.[]\') >> aws_hosts'
+        sh '''printf \\
+                "\\n$(terraform output -json instance_ips | jq -r \'.[]\')"  \\
+                >> aws_hosts'''
       }
     }
     stage('Validate Ansible') {
