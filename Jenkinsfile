@@ -43,6 +43,11 @@ pipeline {
               --region us-west-1'''
       }
     }
+    stage('Inventory') {
+      steps {
+        sh 'printf "\\n$(terraform output -json instance_ips | jq -r \'.[]\') >> aws_hosts'
+      }
+    }
     stage('Validate Ansible') {
       when {
         beforeInput true
