@@ -79,3 +79,7 @@ output "grafana_access" {
 output "instance_ips" {
   value = [for i in aws_instance.ant_main[*]: i.public_ip]
 }
+
+output "instance_ids" {
+  value = [for i in aws_instance.ant_main[*]: i.id]
+}

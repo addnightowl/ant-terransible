@@ -39,7 +39,7 @@ pipeline {
     stage('Ec2 Wait') {
       steps {
         sh '''aws ec2 wait instance-status-ok \\
-              --instance-ids $(terraform show -json | jq -r \'.values\'.\'root_module\'.\'resources[] | select(.type == "aws_instance").values.id\') \\
+              --instance-ids $(terraform show -json instance_ids | jq -r \'.[]\') \\
               --region us-west-1'''
       }
     }
