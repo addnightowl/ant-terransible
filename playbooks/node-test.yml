@@ -6,10 +6,10 @@
     apps:
       prometheus:
         port: 9090
-        status_code: [302]
+        status_code: 302
       grafana:
         port: 3000
-        status_code: [302]
+        status_code: 302
   tasks:
   - name: test_app
     ansible.builtin.uri:
