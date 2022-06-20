@@ -1,5 +1,5 @@
 ---
-- name: Test for Grafana and Prometheus Access
+- name: Test for Grafana and Prometheus access
   hosts: main
   gather_facts: no
   vars:
