@@ -7,20 +7,20 @@
     listen_port: 9090
   
   tasks:
-  - name: Download Apt Key
+  - name: download apt key
     ansible.builtin.apt_key:
       url: https://packages.grafana.com/gpg.key
       state: present
-  - name: Add Grafana Repo to sources.list
+  - name: Add Grafana repo to sources.list
     ansible.builtin.apt_repository:
       repo: deb https://packages.grafana.com/oss/deb stable main
       filename: grafana
       state: present
-  - name: Update Apt Cache and Install Grafana
+  - name: Update apt cache and install Grafana
     ansible.builtin.apt:
       name: grafana
       update_cache: yes
-  - name: Ensure Grafana is Started and Enabled
+  - name: Ensure Grafana is started and enabled
     ansible.builtin.systemd:
       name: grafana-server
       enabled: yes
@@ -34,16 +34,16 @@
       src: /home/ubuntu/prometheus-2.30.3.linux-amd64.tar.gz
       dest: /home/ubuntu/
       remote_src: yes
-  - name: Create Prometheus Group
+  - name: Create Prometheus group
     ansible.builtin.group:
       name: prometheus
       state: present
-  - name: Create Prometheus User
+  - name: Create Prometheus user
     ansible.builtin.user:
       name: prometheus
       group: prometheus
       shell: /sbin/nologin 
-  - name: Create Prometheus Directories
+  - name: Create prometheus directories
     ansible.builtin.file:
       path: "{{ item }}"
       state: directory
@@ -56,14 +56,14 @@
       - /etc/prometheus/rules.d
       - /etc/prometheus/files_sd
       - /var/lib/prometheus
-  - name: Set Permissions
+  - name: set perms
     ansible.builtin.file:
       path: "{{ item }}"
       mode: '0755'
     loop:
       - /etc/prometheus
       - /var/lib/prometheus
-  - name: Copy Files 
+  - name: Copy files 
     ansible.builtin.copy:
       src: "{{ item }}"
       dest: /usr/local/bin
@@ -74,7 +74,7 @@
     loop:
       - /home/ubuntu/prometheus-2.30.3.linux-amd64/prometheus
       - /home/ubuntu/prometheus-2.30.3.linux-amd64/promtool
-  - name: Copy More Files 
+  - name: Copy more files 
     ansible.builtin.copy:
       src: "{{ item }}"
       dest: /etc/prometheus
@@ -90,7 +90,7 @@
     ansible.builtin.template:
       src: prometheus.service.j2
       dest: /etc/systemd/system/prometheus.service
-  - name: Make Sure Prometheus is Started
+  - name: Make sure Prometheus is started
     ansible.builtin.systemd:
       state: started
       enabled: yes
