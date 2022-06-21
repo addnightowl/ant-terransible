@@ -73,7 +73,8 @@ resource "aws_subnet" "ant_public_subnet" {
 resource "aws_subnet" "lunx_private_subnet" {
   count                   = length(local.azs)
   vpc_id                  = aws_vpc.ant_vpc.id
-  cidr_block              = cidrsubnet(var.vpc_cidr, 8, length(local.azs) + count.index)
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, count.index + length(local.azs))
+  # cidr_block              = cidrsubnet(var.vpc_cidr, 8, length(local.azs) + count.index)
   map_public_ip_on_launch = false
   availability_zone       = local.azs[count.index]
 
