@@ -1,0 +1,300 @@
+{
+  "address": "aws_instance.ant_main[0]",
+  "mode": "managed",
+  "type": "aws_instance",
+  "name": "ant_main",
+  "index": 0,
+  "provider_name": "registry.terraform.io/hashicorp/aws",
+  "schema_version": 1,
+  "values": {
+    "ami": "ami-02b38bc5d81cd5945",
+    "arn": "arn:aws:ec2:us-west-1:252036296464:instance/i-005d00e564d05b61c",
+    "associate_public_ip_address": true,
+    "availability_zone": "us-west-1a",
+    "capacity_reservation_specification": [
+      {
+        "capacity_reservation_preference": "open",
+        "capacity_reservation_target": []
+      }
+    ],
+    "cpu_core_count": 1,
+    "cpu_threads_per_core": 1,
+    "credit_specification": [
+      {
+        "cpu_credits": "standard"
+      }
+    ],
+    "disable_api_termination": false,
+    "ebs_block_device": [],
+    "ebs_optimized": false,
+    "enclave_options": [
+      {
+        "enabled": false
+      }
+    ],
+    "ephemeral_block_device": [],
+    "get_password_data": false,
+    "hibernation": false,
+    "host_id": null,
+    "iam_instance_profile": "",
+    "id": "i-005d00e564d05b61c",
+    "instance_initiated_shutdown_behavior": "stop",
+    "instance_state": "running",
+    "instance_type": "t2.micro",
+    "ipv6_address_count": 0,
+    "ipv6_addresses": [],
+    "key_name": "keyant",
+    "launch_template": [],
+    "maintenance_options": [
+      {
+        "auto_recovery": "default"
+      }
+    ],
+    "metadata_options": [
+      {
+        "http_endpoint": "enabled",
+        "http_put_response_hop_limit": 1,
+        "http_tokens": "optional",
+        "instance_metadata_tags": "disabled"
+      }
+    ],
+    "monitoring": false,
+    "network_interface": [],
+    "outpost_arn": "",
+    "password_data": "",
+    "placement_group": "",
+    "placement_partition_number": null,
+    "primary_network_interface_id": "eni-027dc62b10536126e",
+    "private_dns": "ip-10-123-0-243.us-west-1.compute.internal",
+    "private_ip": "10.123.0.243",
+    "public_dns": "ec2-13-57-224-105.us-west-1.compute.amazonaws.com",
+    "public_ip": "13.57.224.105",
+    "root_block_device": [
+      {
+        "delete_on_termination": true,
+        "device_name": "/dev/sda1",
+        "encrypted": false,
+        "iops": 100,
+        "kms_key_id": "",
+        "tags": null,
+        "throughput": 0,
+        "volume_id": "vol-0536776d7d3404392",
+        "volume_size": 8,
+        "volume_type": "gp2"
+      }
+    ],
+    "secondary_private_ips": [],
+    "security_groups": [],
+    "source_dest_check": true,
+    "subnet_id": "subnet-05b4257da36973786",
+    "tags": {
+      "Name": "ant-main-instance-12955"
+    },
+    "tags_all": {
+      "Name": "ant-main-instance-12955"
+    },
+    "tenancy": "default",
+    "timeouts": null,
+    "user_data": null,
+    "user_data_base64": null,
+    "user_data_replace_on_change": false,
+    "volume_tags": null,
+    "vpc_security_group_ids": [
+      "sg-06bc56510a9ff7aa3"
+    ]
+  },
+  "sensitive_values": {
+    "capacity_reservation_specification": [
+      {
+        "capacity_reservation_target": []
+      }
+    ],
+    "credit_specification": [
+      {}
+    ],
+    "ebs_block_device": [],
+    "enclave_options": [
+      {}
+    ],
+    "ephemeral_block_device": [],
+    "ipv6_addresses": [],
+    "launch_template": [],
+    "maintenance_options": [
+      {}
+    ],
+    "metadata_options": [
+      {}
+    ],
+    "network_interface": [],
+    "root_block_device": [
+      {}
+    ],
+    "secondary_private_ips": [],
+    "security_groups": [],
+    "tags": {},
+    "tags_all": {},
+    "vpc_security_group_ids": [
+      false
+    ]
+  },
+  "depends_on": [
+    "aws_key_pair.ant_auth",
+    "aws_security_group.ant_sg",
+    "aws_subnet.ant_public_subnet",
+    "aws_vpc.ant_vpc",
+    "data.aws_ami.server_ami",
+    "data.aws_availability_zones.available",
+    "random_id.ant_node_id",
+    "random_id.random"
+  ]
+}
+{
+  "address": "aws_instance.ant_main[1]",
+  "mode": "managed",
+  "type": "aws_instance",
+  "name": "ant_main",
+  "index": 1,
+  "provider_name": "registry.terraform.io/hashicorp/aws",
+  "schema_version": 1,
+  "values": {
+    "ami": "ami-02b38bc5d81cd5945",
+    "arn": "arn:aws:ec2:us-west-1:252036296464:instance/i-0f6364b1a1eb350e0",
+    "associate_public_ip_address": true,
+    "availability_zone": "us-west-1b",
+    "capacity_reservation_specification": [
+      {
+        "capacity_reservation_preference": "open",
+        "capacity_reservation_target": []
+      }
+    ],
+    "cpu_core_count": 1,
+    "cpu_threads_per_core": 1,
+    "credit_specification": [
+      {
+        "cpu_credits": "standard"
+      }
+    ],
+    "disable_api_termination": false,
+    "ebs_block_device": [],
+    "ebs_optimized": false,
+    "enclave_options": [
+      {
+        "enabled": false
+      }
+    ],
+    "ephemeral_block_device": [],
+    "get_password_data": false,
+    "hibernation": false,
+    "host_id": null,
+    "iam_instance_profile": "",
+    "id": "i-0f6364b1a1eb350e0",
+    "instance_initiated_shutdown_behavior": "stop",
+    "instance_state": "running",
+    "instance_type": "t2.micro",
+    "ipv6_address_count": 0,
+    "ipv6_addresses": [],
+    "key_name": "keyant",
+    "launch_template": [],
+    "maintenance_options": [
+      {
+        "auto_recovery": "default"
+      }
+    ],
+    "metadata_options": [
+      {
+        "http_endpoint": "enabled",
+        "http_put_response_hop_limit": 1,
+        "http_tokens": "optional",
+        "instance_metadata_tags": "disabled"
+      }
+    ],
+    "monitoring": false,
+    "network_interface": [],
+    "outpost_arn": "",
+    "password_data": "",
+    "placement_group": "",
+    "placement_partition_number": null,
+    "primary_network_interface_id": "eni-03b917d03312654bf",
+    "private_dns": "ip-10-123-1-146.us-west-1.compute.internal",
+    "private_ip": "10.123.1.146",
+    "public_dns": "ec2-54-219-84-45.us-west-1.compute.amazonaws.com",
+    "public_ip": "54.219.84.45",
+    "root_block_device": [
+      {
+        "delete_on_termination": true,
+        "device_name": "/dev/sda1",
+        "encrypted": false,
+        "iops": 100,
+        "kms_key_id": "",
+        "tags": null,
+        "throughput": 0,
+        "volume_id": "vol-07069a09e1594712e",
+        "volume_size": 8,
+        "volume_type": "gp2"
+      }
+    ],
+    "secondary_private_ips": [],
+    "security_groups": [],
+    "source_dest_check": true,
+    "subnet_id": "subnet-0d40288c76dfbf8c5",
+    "tags": {
+      "Name": "ant-main-instance-17060"
+    },
+    "tags_all": {
+      "Name": "ant-main-instance-17060"
+    },
+    "tenancy": "default",
+    "timeouts": null,
+    "user_data": null,
+    "user_data_base64": null,
+    "user_data_replace_on_change": false,
+    "volume_tags": null,
+    "vpc_security_group_ids": [
+      "sg-06bc56510a9ff7aa3"
+    ]
+  },
+  "sensitive_values": {
+    "capacity_reservation_specification": [
+      {
+        "capacity_reservation_target": []
+      }
+    ],
+    "credit_specification": [
+      {}
+    ],
+    "ebs_block_device": [],
+    "enclave_options": [
+      {}
+    ],
+    "ephemeral_block_device": [],
+    "ipv6_addresses": [],
+    "launch_template": [],
+    "maintenance_options": [
+      {}
+    ],
+    "metadata_options": [
+      {}
+    ],
+    "network_interface": [],
+    "root_block_device": [
+      {}
+    ],
+    "secondary_private_ips": [],
+    "security_groups": [],
+    "tags": {},
+    "tags_all": {},
+    "vpc_security_group_ids": [
+      false
+    ]
+  },
+  "depends_on": [
+    "aws_key_pair.ant_auth",
+    "aws_security_group.ant_sg",
+    "aws_subnet.ant_public_subnet",
+    "aws_vpc.ant_vpc",
+    "data.aws_ami.server_ami",
+    "data.aws_availability_zones.available",
+    "random_id.ant_node_id",
+    "random_id.random"
+  ]
+}
