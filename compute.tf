@@ -7,7 +7,7 @@ data "aws_ami" "server_ami" {
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"] # * = latest
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"] # * = latest
   }
 }
 
@@ -37,16 +37,16 @@ resource "aws_instance" "ant_main" {
     Name = "ant-main-instance-${random_id.ant_node_id[count.index].dec}"
   }
 
-    # # provisioners use "-" not "_".
-    # provisioner "local-exec" {
-    #   command = "printf '\n${self.public_ip}' >> aws_hosts"
-    #   # command = "printf '\n${self.public_ip}' >> aws_hosts && aws ec2 wait instance-status-ok --instance-ids ${self.id} --region us-west-1"
-    # }
-    # # you have to destroy everything for a destroy provisioner to work.
-    # provisioner "local-exec" {
-    #   when    = destroy
-    #   command = "sed -i '/^[0-9]/d' aws_hosts" #any line that '/^(starts with)[0-9](process that line)/d(delete that line)' (filename)
-    # }
+  # # provisioners use "-" not "_".
+  # provisioner "local-exec" {
+  #   command = "printf '\n${self.public_ip}' >> aws_hosts"
+  #   # command = "printf '\n${self.public_ip}' >> aws_hosts && aws ec2 wait instance-status-ok --instance-ids ${self.id} --region us-west-1"
+  # }
+  # # you have to destroy everything for a destroy provisioner to work.
+  # provisioner "local-exec" {
+  #   when    = destroy
+  #   command = "sed -i '/^[0-9]/d' aws_hosts" #any line that '/^(starts with)[0-9](process that line)/d(delete that line)' (filename)
+  # }
 }
 
 # run tf init to initialize the null_resource
