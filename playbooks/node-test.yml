@@ -1,7 +1,6 @@
 ---
 - name: Test for Grafana and Prometheus access
   hosts: main
-  become: yes
   gather_facts: no
   vars:
     apps:
