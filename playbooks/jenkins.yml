@@ -16,4 +16,9 @@
   - name: Update apt cache and install jenkins
     apt:
       name: jenkins
-      update_cache: yes 
+      update_cache: yes
+  - name : Ensure Jenkins is started and enabled
+    ansible.builtin.systemd:
+      name: jenkins
+      enabled: yes
+      state: started
