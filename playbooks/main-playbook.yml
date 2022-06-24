@@ -43,11 +43,12 @@
       name: prometheus
       group: prometheus
       shell: /sbin/nologin 
-  - name: Create prometheus directories
+  - name: Create Prometheus directories
     ansible.builtin.file:
       path: "{{ item }}"
       state: directory
       recurse: yes
+      mode: '0755'
       owner: prometheus
       group: prometheus
     loop:
@@ -55,13 +56,6 @@
       - /etc/prometheus/rules
       - /etc/prometheus/rules.d
       - /etc/prometheus/files_sd
-      - /var/lib/prometheus
-  - name: set perms
-    ansible.builtin.file:
-      path: "{{ item }}"
-      mode: '0755'
-    loop:
-      - /etc/prometheus
       - /var/lib/prometheus
   - name: Copy files 
     ansible.builtin.copy:
