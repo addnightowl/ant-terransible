@@ -97,9 +97,9 @@ resource "aws_security_group" "ant_sg" {
 
 resource "aws_security_group_rule" "ingress_all" {
   type              = "ingress"
-  from_port         = 80
-  to_port           = 80
-  protocol          = "tcp"
+  from_port         = 0
+  to_port           = 65535
+  protocol          = "-1"
   cidr_blocks       = [var.access_ip, var.cloud9_ip]
   security_group_id = aws_security_group.ant_sg.id
 }
