@@ -3,7 +3,7 @@
   hosts: main
   become: yes
   vars:
-    listen_address: 0.0.0.0
+    listen_address: localhost
     listen_port: 9090
   
   tasks:
