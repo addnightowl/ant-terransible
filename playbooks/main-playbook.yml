@@ -1,7 +1,7 @@
 ---
 - name: Bootstrap Node
   hosts: main
-  become: yes
+  become: true
   vars:
     listen_address: 0.0.0.0
     listen_port: 9090

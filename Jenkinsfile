@@ -46,8 +46,8 @@ pipeline {
     stage('Ec2 Wait') {
       steps {
         sh '''aws ec2 wait instance-status-ok \\
-                --instance-ids $(terraform output -json instance_ids | jq -r \'.[]\') \\
-                --region us-west-1'''
+              --instance-ids $(terraform output -json instance_ids | jq -r \'.[]\') \\
+              --region us-west-1'''
       }
     }
     stage('Validate Ansible') {
