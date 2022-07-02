@@ -1,0 +1,15 @@
+---
+- name: Static Test for Grafana and Prometheus Access
+  hosts: main
+  gather_facts: no
+  tasks:
+  - name: prometheus
+    ansible.builtin.uri:
+      url: http://{{ inventory_hostname }}:9090
+      follow_redirects: none
+      status_code: [302]
+  - name: grafana
+    ansible.builtin.uri:
+      url: http://{{ inventory_hostname }}:3000
+      follow_redirects: none
+      status_code: [302]
