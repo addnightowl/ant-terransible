@@ -1,4 +1,4 @@
-# --- lunx-terransible/compute.tf ---
+# --- ant-terransible/compute.tf ---
 
 data "aws_ami" "server_ami" {
   most_recent = true

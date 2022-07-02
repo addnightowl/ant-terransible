@@ -9,7 +9,7 @@ variable "vpc_cidr" {
 # var.access_ip
 variable "access_ip" {
   type    = string
-  default = "73.115.239.96/32"
+  default = "0.0.0.0/0"
 }
 
 # var.cloud9_ip
@@ -33,7 +33,7 @@ variable "main_vol_size" {
 # var.main_instance_count
 variable "main_instance_count" {
   type    = number
-  default = 1
+  default = 2
 }
 
 # var.key_name
