@@ -1,5 +1,5 @@
 config {
-    module = true
+  module = true
 }
 
 plugin "aws" {
