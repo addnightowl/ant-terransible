@@ -3,7 +3,7 @@ on:
     branches: [ main ]
 
 name: "Shellcheck-2 Linting"
-permissions: { "read-all", "write-all" }
+permissions: {}
 
 jobs:
   shellcheck:
