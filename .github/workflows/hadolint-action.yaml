@@ -14,8 +14,5 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - name: Hadolint Action
-        uses: hadolint/hadolint-action@v3.0.0
-        with:
-          dockerfile: ./Dockerfile
-          config: ./.hadolint.yaml
+      - uses: actions/checkout@v3
+      - uses: jbergstroem/hadolint-gh-action@v1.11.0
