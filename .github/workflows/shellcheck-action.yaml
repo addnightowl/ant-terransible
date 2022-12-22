@@ -16,8 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run ShellCheck
-        with:
-          github_token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
         uses: ludeeus/action-shellcheck@master
 
 # on:
