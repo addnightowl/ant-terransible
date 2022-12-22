@@ -1,0 +1,38 @@
+name: Shellcheck Linting
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  shellcheck:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run ShellCheck
+        with:
+          github_token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
+        uses: ludeeus/action-shellcheck@master
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+# name: "Trigger: Push action"
+# permissions: {}
+
+# jobs:
+#   shellcheck:
+#     name: Shellcheck
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Run ShellCheck
+#         uses: ludeeus/action-shellcheck@master
