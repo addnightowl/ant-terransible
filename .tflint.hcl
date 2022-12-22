@@ -1,4 +1,3 @@
-
 config {
     module = true
 }
@@ -61,7 +60,7 @@ rule "terraform_module_version" {
 rule "terraform_naming_convention" {
   enabled = true # 0 issues found 
   custom = "^([a-zA-Z0-9])+([_-][a-zA-Z0-9]+)*$"
-
+}
 
 # Require that all providers have version constraints through required_providers. [Recommended]
 rule "terraform_required_providers" {
