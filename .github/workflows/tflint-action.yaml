@@ -24,12 +24,9 @@ jobs:
         key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
 
     - uses: terraform-linters/setup-tflint@v2
-      with:
-        github_token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
-
-    - uses: terraform-linters/setup-tflint@v2
       name: Setup TFLint
       with:
+        github_token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
         tflint_version: latest
 
     - name: Show version
