@@ -1,4 +1,9 @@
-name: Terraform Linting
+# For more information on the TFLint Github Action, see - https://github.com/terraform-linters/setup-tflint
+# For more information on TFLint, see - https://github.com/terraform-linters/tflint
+# For more information on the TFLint Terraform Ruleset, see - https://github.com/terraform-linters/tflint-ruleset-terraform
+# For more information on the TFLint AWS Ruleset, see - https://github.com/terraform-linters/tflint-ruleset-aws
+
+name: TFLint Action - Linting Terraform & AWS
 on:
   push:
     branches: [ main ]
@@ -6,7 +11,7 @@ on:
     branches: [ main ]
 
 jobs:
-  tflint:
+  TFLint:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -15,10 +20,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      name: Checkout source code
+      name: Checkout Source Code
 
     - uses: actions/cache@v2
-      name: Cache plugin dir
+      name: Cache Plugin Dir
       with:
         path: ~/.tflint.d/plugins
         key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
@@ -29,7 +34,7 @@ jobs:
         github_token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
         tflint_version: latest
 
-    - name: Show version
+    - name: Show Version
       run: tflint --version
 
     - name: Init TFLint

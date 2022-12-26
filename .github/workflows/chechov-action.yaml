@@ -1,4 +1,8 @@
-name: Checkov for Security
+# For more information on the Checkov Github Action, see - https://github.com/marketplace/actions/checkov-github-action
+# For more information on Checkov, see - https://www.checkov.io/1.Welcome/What%20is%20Checkov.html
+# For more information on the Checkov Terraform Scan Policy, see - https://www.checkov.io/5.Policy%20Index/terraform.html
+
+name: Checkov Action - Security and Compliance Analysis
 on:
   push:
     branches: [ main ]
@@ -6,7 +10,7 @@ on:
     branches: [ main ]
 
 jobs:
-  hadolint:
+  Checkov:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -14,9 +18,11 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - name: Checkout repo
+      - name: Checkout Repo
         uses: actions/checkout@master
 
-      - name: Run Checkov action
+      - name: Run Checkov Action
         id: checkov
         uses: bridgecrewio/checkov-action@master
+        # with:
+        #   config_file: .chechov.yaml

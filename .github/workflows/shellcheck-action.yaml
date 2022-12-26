@@ -1,4 +1,7 @@
-name: Shellcheck Linting
+# For more information on the ShellCheck Github Action, see - https://github.com/ludeeus/action-shellcheck
+# For more information on the ShellCheck Wiki Sitemap, see - https://www.shellcheck.net/wiki/<type rule here>
+
+name: Shellcheck Action - Linting Shell Scripts
 on:
   push:
     branches: [ main ]
@@ -6,7 +9,7 @@ on:
     branches: [ main ]
 
 jobs:
-  shellcheck:
+  ShellCheck:
     runs-on: ${{ matrix.os }}
 
     strategy:

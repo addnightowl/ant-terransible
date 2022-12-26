@@ -1,4 +1,8 @@
-name: Hadolint Linting
+# For more information on the Hadolint Github Action, see - https://github.com/marketplace/actions/hadolint-action
+# For more information on Hadolint, see - https://github.com/hadolint/hadolint#how-to-use
+# For more information on the Hadolint Wiki, see - https://github.com/hadolint/hadolint/wiki/<type rule here>
+
+name: Hadolint Action - Linting Dockerfiles
 on:
   push:
     branches: [ main ]
@@ -6,7 +10,7 @@ on:
     branches: [ main ]
 
 jobs:
-  hadolint:
+  Hadolint:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -14,5 +18,7 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: jbergstroem/hadolint-gh-action@v1.11.0
+      - uses: actions/checkout@v2 
+      - uses: hadolint/hadolint-action@v3.0.0
+        with:
+          dockerfile: Dockerfile
