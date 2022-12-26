@@ -41,4 +41,4 @@ jobs:
       run: tflint --init
 
     - name: Run TFLint
-      run: tflint
+      run: tflint --config-file linting-configs/.tflint.hcl
