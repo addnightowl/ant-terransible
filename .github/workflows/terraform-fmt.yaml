@@ -26,3 +26,4 @@ jobs:
           title: Reformated Terraform Files
           body: Updated terraform files to canonical format using `terraform fmt`.
           branch: automated-terraform-fmt
+          token: token=${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
