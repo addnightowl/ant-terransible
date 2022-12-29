@@ -13,14 +13,14 @@ resource "random_id" "random" {
 
 resource "aws_vpc" "ant_vpc" {
   cidr_block           = var.vpc_cidr
-  enable_dns_hostnames = true
+  enable_dns_hostnames =       true
   enable_dns_support   = true
 
   tags = {
     Name = "ant_vpc-${random_id.random.dec}"
   }
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy =        true
   }
 }
 
