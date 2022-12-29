@@ -21,12 +21,12 @@ jobs:
         uses: dflook/terraform-fmt@v1.29.1
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v4.2.3
         with:
           commit-message: terraform fmt
           title: Reformated Terraform Files
           body: Updated terraform files to canonical format using `terraform fmt`.
           branch: automated-terraform-fmt
-          token: token=${{ secrets.TF_CLOUD_API_TOKEN }}
+          token: token=${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
           delete-branch: false
           draft: true
