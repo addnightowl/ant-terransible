@@ -14,13 +14,13 @@ variable "access_ip" {
 
 # var.cloud9_ip
 variable "cloud9_ip" {
-  type = string
+  type    = string
   default = "52.21.53.148/32"
 }
 
 # var.main_instance_type
 variable "main_instance_type" {
-  type = string
+  type    = string
   default = "t2.micro"
 }
 
