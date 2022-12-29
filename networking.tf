@@ -13,14 +13,14 @@ resource "random_id" "random" {
 
 resource "aws_vpc" "ant_vpc" {
   cidr_block           = var.vpc_cidr
-  enable_dns_hostnames =       true
+  enable_dns_hostnames = true
   enable_dns_support   = true
 
   tags = {
     Name = "ant_vpc-${random_id.random.dec}"
   }
   lifecycle {
-    create_before_destroy =        true
+    create_before_destroy = true
   }
 }
 
@@ -59,8 +59,8 @@ resource "aws_default_route_table" "ant_private_rt" {
 }
 
 resource "aws_subnet" "ant_public_subnet" {
-  count = length(local.azs)
-  vpc_id = aws_vpc.ant_vpc.id
+  count                   = length(local.azs)
+  vpc_id                  = aws_vpc.ant_vpc.id
   cidr_block              = cidrsubnet(var.vpc_cidr, 8, count.index)
   map_public_ip_on_launch = true
   availability_zone       = local.azs[count.index]
@@ -71,9 +71,9 @@ resource "aws_subnet" "ant_public_subnet" {
 }
 
 resource "aws_subnet" "ant_private_subnet" {
-  count      = length(local.azs)
-  vpc_id     = aws_vpc.ant_vpc.id
-  cidr_block = cidrsubnet(var.vpc_cidr, 8, count.index + length(local.azs))
+  count                   = length(local.azs)
+  vpc_id                  = aws_vpc.ant_vpc.id
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, count.index + length(local.azs))
   map_public_ip_on_launch = false
   availability_zone       = local.azs[count.index]
 
