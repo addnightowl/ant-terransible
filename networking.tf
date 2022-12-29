@@ -59,8 +59,8 @@ resource "aws_default_route_table" "ant_private_rt" {
 }
 
 resource "aws_subnet" "ant_public_subnet" {
-  count                   = length(local.azs)
-  vpc_id                  = aws_vpc.ant_vpc.id
+  count = length(local.azs)
+  vpc_id = aws_vpc.ant_vpc.id
   cidr_block              = cidrsubnet(var.vpc_cidr, 8, count.index)
   map_public_ip_on_launch = true
   availability_zone       = local.azs[count.index]
