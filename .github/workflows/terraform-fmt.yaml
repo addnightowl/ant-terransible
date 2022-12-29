@@ -2,8 +2,9 @@ name: Fix terraform file formatting
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main, dev, automated-terraform-fmt ]
+  pull_request:
+    branches: [ main ]
 
 # env:
 #   TERRAFORM_CLOUD_TOKENS: app.terraform.io=${{ secrets.TF_CLOUD_API_TOKEN }}
