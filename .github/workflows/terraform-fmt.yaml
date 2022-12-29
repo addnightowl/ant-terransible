@@ -29,4 +29,4 @@ jobs:
           branch: automated-terraform-fmt
           token: token=${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
           delete-branch: false
-          draft: true
+          draft: false
