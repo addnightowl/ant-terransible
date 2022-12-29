@@ -27,3 +27,5 @@ jobs:
           body: Updated terraform files to canonical format using `terraform fmt`.
           branch: automated-terraform-fmt
           token: token=${{ secrets.TF_CLOUD_API_TOKEN }}
+          delete-branch: false
+          draft: true
