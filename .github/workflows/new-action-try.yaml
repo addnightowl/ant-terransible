@@ -2,7 +2,7 @@ name: Linter Actions - Security and Compliance Analysis
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev, automated-terraform-fmt ]
   pull_request:
     branches: [ main ]
 
@@ -86,3 +86,28 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           config_file: linting-configs/.checkov.yaml
+
+  # Terraform Formatting
+  Terraform-Formatting:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: terraform fmt
+        uses: dflook/terraform-fmt@v1.29.1
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4.2.3
+        with:
+          commit-message: terraform fmt
+          title: Reformated Terraform Files
+          body: Updated terraform files to canonical format using `terraform fmt`.
+          branch: main
+          delete-branch: false
+          draft: false
