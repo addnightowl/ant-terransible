@@ -26,7 +26,7 @@ jobs:
           commit-message: terraform fmt
           title: Reformated Terraform Files
           body: Updated terraform files to canonical format using `terraform fmt`.
-          branch: main
+          branch: automated-terraform-fmt
           token: token=${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
           delete-branch: false
           draft: true
