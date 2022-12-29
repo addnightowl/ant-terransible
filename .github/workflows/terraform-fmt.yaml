@@ -5,8 +5,8 @@ on:
     branches:
       - main
 
-env:
-  TERRAFORM_CLOUD_TOKENS: app.terraform.io=${{ secrets.TF_CLOUD_API_TOKEN }}
+# env:
+#   TERRAFORM_CLOUD_TOKENS: app.terraform.io=${{ secrets.TF_CLOUD_API_TOKEN }}
 
 jobs:
   Terraform-Formatting:
