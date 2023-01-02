@@ -50,3 +50,8 @@ variable "public_key_path" {
 variable "shared_credentials_files" {
   type = list(any)
 }
+
+# var.profile_name
+variable "profile_name" {
+  type = string
+}

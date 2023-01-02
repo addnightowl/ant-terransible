@@ -111,3 +111,27 @@ jobs:
           branch: main
           delete-branch: false
           draft: false
+
+  # Terraform_Linter
+  pre-commit:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: pre-commit/action@v3.0.0
+        with:
+          extra_args: terraform_fmt --all-files
+
+      - uses: pre-commit/action@v3.0.0
+        with:
+          extra_args: terraform_validate
+
+      - uses: pre-commit/action@v3.0.0
+        with:
+          extra_args: terraform_tflint
