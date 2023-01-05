@@ -12,7 +12,7 @@ resource "random_id" "random" {
 
 
 resource "aws_vpc" "ant_vpc" {
-  cidr_block  = var.vpc_cidr
+  cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
   enable_dns_support   = true
 
@@ -44,7 +44,7 @@ resource "aws_route_table" "ant_public_rt" {
 
 
 resource "aws_route" "ant_default_route" {
-  route_table_id  = aws_route_table.ant_public_rt.id
+  route_table_id         = aws_route_table.ant_public_rt.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.ant_igw.id
 }
@@ -71,9 +71,9 @@ resource "aws_subnet" "ant_public_subnet" {
 }
 
 resource "aws_subnet" "ant_private_subnet" {
-  count        = length(local.azs)
-  vpc_id               = aws_vpc.ant_vpc.id
-  cidr_block       = cidrsubnet(var.vpc_cidr, 8, count.index + length(local.azs))
+  count                   = length(local.azs)
+  vpc_id                  = aws_vpc.ant_vpc.id
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, count.index + length(local.azs))
   map_public_ip_on_launch = false
   availability_zone       = local.azs[count.index]
 
