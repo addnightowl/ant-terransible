@@ -90,7 +90,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.2.3
         with:
-          token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
+          # token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
           commit-message: updated terraform formatting
           title: Reformated Terraform Files
           body: Updated terraform files to canonical format using `terraform fmt`.
