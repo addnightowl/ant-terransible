@@ -16,7 +16,7 @@ jobs:
       - name: Run Hadolint Action
         uses: jbergstroem/hadolint-gh-action@v1.11.0
         with:
-          dockerfile: ./Dockerfile
+          dockerfile: Dockerfile
           config_file: linting-configs/.hadolint.yaml
           error_level: 1 # Fail CI based on hadolint output (-1: never, 0: error, 1: warning, 2: info)
 
@@ -60,7 +60,7 @@ jobs:
       run: TFLINT_LOG=info tflint --init --config linting-configs/.tflint.hcl
 
     - name: Run TFLint
-      run: TFLINT_LOG=info tflint
+      run: TFLINT_LOG=info tflint --config linting-configs/.tflint.hcl
         
   # Checkov
   Checkov:
