@@ -87,7 +87,6 @@ jobs:
         uses: dflook/terraform-fmt@v1.29.1
 
       - name: Create Pull Request
-        id: cpr
         uses: peter-evans/create-pull-request@v4.2.3
         with:
           commit-message: updated terraform formatting
@@ -97,11 +96,3 @@ jobs:
           delete-branch: false
           draft: false
           labels: automated pr
-
-      - name: Enable Pull Request Automerge
-        if: steps.cpr.outputs.pull-request-operation == 'created'
-        uses: peter-evans/enable-pull-request-automerge@v2
-        with:
-          token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: squash
