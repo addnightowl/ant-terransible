@@ -3,8 +3,8 @@ name: Linter Analysis
 on: 
   push:
   pull_request: 
-    branches: 
-      - merge-to-dev
+    # branches: 
+    #   - merge-to-dev
 
 jobs:
 
@@ -101,13 +101,13 @@ jobs:
           draft: false
           labels: automated pr
 
-      # - name: Enable Pull Request Automerge
-      #   if: steps.cpr.outputs.pull-request-operation == 'created'
-      #   uses: peter-evans/enable-pull-request-automerge@v2
-      #   with:
-      #     token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
-      #     pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-      #     merge-method: squash
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
 
       # - name: Auto-Merge
       #   if: github.actor == 'github-actions[bot]'
