@@ -3,7 +3,7 @@ pipeline {
   environment {
     TF_IN_AUTOMATION = 'true'
     TF_CLI_CONFIG_FILE = credentials('tf-credentials')
-    AWS_SHARED_CREDENTIALS_FILE='/home/ubuntu/.aws/credentials'
+    AWS_SHARED_CREDENTIALS_FILE='~/.aws/credentials'
   }
   stages {
     stage('Init') {

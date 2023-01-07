@@ -2,37 +2,37 @@
 
 # var.vpc_cidr
 variable "vpc_cidr" {
-  type    = string
+  type = string
   default = "10.123.0.0/16"
 }
 
 # var.access_ip
 variable "access_ip" {
-  type    = string
+  type = string
   default = "0.0.0.0/0"
 }
 
 # var.cloud9_ip
 variable "cloud9_ip" {
-  type    = string
+  type = string
   default = "52.21.53.148/32"
 }
 
 # var.main_instance_type
 variable "main_instance_type" {
-  type    = string
+  type = string
   default = "t2.micro"
 }
 
 # var.main_vol_size
 variable "main_vol_size" {
-  type    = number
+  type = number
   default = 8
 }
 
 # var.main_instance_count
 variable "main_instance_count" {
-  type    = number
+  type = number
   default = 2
 }
 
@@ -49,4 +49,9 @@ variable "public_key_path" {
 # var.shared_credentials_files
 variable "shared_credentials_files" {
   type = list(any)
+}
+
+# var.profile_name
+variable "profile_name" {
+  type = string
 }
