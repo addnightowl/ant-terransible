@@ -96,12 +96,10 @@ jobs:
       #     token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
       #     pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
       #     merge-method: squash
-
-  Auto-Merge:
-    runs-on: ubuntu-latest
-    if: github.actor == 'github-actions[bot]'
-    steps:
-      - uses: peter-evans/enable-pull-request-automerge@v2
+      
+      - name: Auto-Merge
+        if: github.actor == 'github-actions[bot]'
+        uses: peter-evans/enable-pull-request-automerge@v2
         with:
           pull-request-number: ${{ github.event.pull_request.number }}
           merge-method: squash
