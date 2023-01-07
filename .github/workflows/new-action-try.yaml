@@ -4,7 +4,12 @@ on:
   push:
     branches:
       - '**'
+  pull_request:
+    branches:
+      - '**'
   branch_protection_rule:
+    branches:
+      - '**'
 
 jobs:
 
