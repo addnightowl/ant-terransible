@@ -2,8 +2,12 @@ name: Linter Analysis
 
 on: 
   push:
+    branches:
+      - merge-to-dev
   pull_request: 
-    branches: [automated-terraform-fmt]
+    branches: 
+      - merge-to-dev
+      - automated-terraform-fmt
 
 jobs:
 
