@@ -89,22 +89,22 @@ jobs:
           delete-branch: false
           draft: false
 
-      - name: Enable Pull Request Automerge
-        if: steps.cpr.outputs.pull-request-operation == 'created'
-        uses: peter-evans/enable-pull-request-automerge@v2
-        with:
-          token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: squash
+      # - name: Enable Pull Request Automerge
+      #   if: steps.cpr.outputs.pull-request-operation == 'created'
+      #   uses: peter-evans/enable-pull-request-automerge@v2
+      #   with:
+      #     token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
+      #     pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+      #     merge-method: squash
 
-  # Auto-Merge:
-  #   runs-on: ubuntu-latest
-  #   if: github.actor == 'github-actions[bot]'
-  #   steps:
-  #     - uses: peter-evans/enable-pull-request-automerge@v2
-  #       with:
-  #         pull-request-number: ${{ github.event.pull_request.number }}
-  #         merge-method: squash
+  Auto-Merge:
+    runs-on: ubuntu-latest
+    if: github.actor == 'github-actions[bot]'
+    steps:
+      - uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: squash
 
       # - name: Auto approve
       #   if: steps.cpr.outputs.pull-request-operation == 'created'
