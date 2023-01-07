@@ -35,8 +35,8 @@ jobs:
 
   # TFLint
   TFLint:
+    name: TFLint
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
       name: Checkout Source Code
@@ -64,8 +64,8 @@ jobs:
         
   # Checkov
   Checkov:
+    name: Checkov
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -83,21 +83,23 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          ref: "refs/pull/${{ github.event.number }}/merge"
 
       - name: Run Terraform-Fmt Action
         uses: dflook/terraform-fmt@v1.29.1
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4.2.3
-        with:
-          # token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
-          commit-message: updated terraform formatting
-          title: Reformated Terraform Files
-          body: Updated terraform files to canonical format using `terraform fmt`.
-          branch: automated-terraform-fmt
-          delete-branch: false
-          draft: false
-          labels: automated pr
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v4.2.3
+      #   with:
+      #     # token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
+      #     commit-message: updated terraform formatting
+      #     title: Reformated Terraform Files
+      #     body: Updated terraform files to canonical format using `terraform fmt`.
+      #     branch: automated-terraform-fmt
+      #     delete-branch: false
+      #     draft: false
+      #     labels: automated pr
 
       # - name: Enable Pull Request Automerge
       #   if: steps.cpr.outputs.pull-request-operation == 'created'
@@ -107,12 +109,12 @@ jobs:
       #     pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
       #     merge-method: squash
 
-      - name: Auto-Merge
-        if: github.actor == 'github-actions[bot]'
-        uses: peter-evans/enable-pull-request-automerge@v2
-        with:
-          pull-request-number: ${{ github.event.pull_request.number }}
-          merge-method: squash
+      # - name: Auto-Merge
+      #   if: github.actor == 'github-actions[bot]'
+      #   uses: peter-evans/enable-pull-request-automerge@v2
+      #   with:
+      #     pull-request-number: ${{ github.event.pull_request.number }}
+      #     merge-method: squash
 
       # - name: Auto approve
       #   if: steps.cpr.outputs.pull-request-operation == 'created'
