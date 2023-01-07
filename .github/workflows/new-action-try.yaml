@@ -99,20 +99,20 @@ jobs:
           draft: false
           labels: automated pr
 
-      - name: Enable Pull Request Automerge
-        if: steps.cpr.outputs.pull-request-operation == 'created'
-        uses: peter-evans/enable-pull-request-automerge@v2
-        with:
-          token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: squash
-
-      # - name: Auto-Merge
-      #   if: github.actor == 'github-actions[bot]'
+      # - name: Enable Pull Request Automerge
+      #   if: steps.cpr.outputs.pull-request-operation == 'created'
       #   uses: peter-evans/enable-pull-request-automerge@v2
       #   with:
-      #     pull-request-number: ${{ github.event.pull_request.number }}
+      #     token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
+      #     pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
       #     merge-method: squash
+
+      - name: Auto-Merge
+        if: github.actor == 'github-actions[bot]'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: squash
 
       # - name: Auto approve
       #   if: steps.cpr.outputs.pull-request-operation == 'created'
