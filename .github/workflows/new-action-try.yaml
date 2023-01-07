@@ -1,10 +1,6 @@
 name: Linter Analysis
 
-on: 
-  push:
-  pull_request: 
-    # branches: 
-    #   - merge-to-dev
+on: [push, pull_request]
 
 jobs:
 
