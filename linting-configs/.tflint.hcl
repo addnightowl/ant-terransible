@@ -14,8 +14,6 @@ plugin "terraform" {
   # source  = "github.com/terraform-linters/tflint-ruleset-terraform"
 }
 
-
-
 # Disallow // comments in favor of #.
 rule "terraform_comment_syntax" {
   enabled = true # 0 issues found
