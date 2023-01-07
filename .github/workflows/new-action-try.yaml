@@ -7,23 +7,31 @@ jobs:
 
   # Hadolint
   Hadolint:
+    name: Hadolint
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
-      - uses: hadolint/hadolint-action@v3.0.0
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Run Hadolint Action
+        uses: jbergstroem/hadolint-gh-action@v1.11.0
         with:
-          dockerfile: Dockerfile
-          config: linting-configs/.hadolint.yaml
+          dockerfile: ./Dockerfile
+          config_file: linting-configs/.hadolint.yaml
+          error_level: 1 # Fail CI based on hadolint output (-1: never, 0: error, 1: warning, 2: info)
 
   # ShellCheck
   ShellCheck:
+    name: ShellCheck
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Run ShellCheck
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Run ShellCheck Action
         uses: ludeeus/action-shellcheck@master
+        with:
+          severity: error
 
   # TFLint
   TFLint:
@@ -49,10 +57,10 @@ jobs:
       run: tflint --version
 
     - name: Init TFLint
-      run: tflint --init
+      run: TFLINT_LOG=info tflint --init --config linting-configs/.tflint.hcl
 
     - name: Run TFLint
-      run: TFLINT_LOG=info tflint --config=linting-configs/.tflint.hcl
+      run: TFLINT_LOG=info tflint
         
   # Checkov
   Checkov:
@@ -70,39 +78,41 @@ jobs:
 
   # Terraform Formatting
   Terraform-Formatting:
+    name: Auto-Terraform Formatting
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
+      - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: terraform fmt
+      - name: Run Terraform-Fmt Action
         uses: dflook/terraform-fmt@v1.29.1
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.2.3
         with:
-          commit-message: terraform fmt
+          token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
+          commit-message: updated terraform formatting
           title: Reformated Terraform Files
           body: Updated terraform files to canonical format using `terraform fmt`.
           branch: automated-terraform-fmt
           delete-branch: false
           draft: false
+          labels: automated pr
 
-      # - name: Enable Pull Request Automerge
-      #   if: steps.cpr.outputs.pull-request-operation == 'created'
-      #   uses: peter-evans/enable-pull-request-automerge@v2
-      #   with:
-      #     token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
-      #     pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-      #     merge-method: squash
-      
-      - name: Auto-Merge
-        if: github.actor == 'github-actions[bot]'
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@v2
         with:
-          pull-request-number: ${{ github.event.pull_request.number }}
+          token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: squash
+
+      # - name: Auto-Merge
+      #   if: github.actor == 'github-actions[bot]'
+      #   uses: peter-evans/enable-pull-request-automerge@v2
+      #   with:
+      #     pull-request-number: ${{ github.event.pull_request.number }}
+      #     merge-method: squash
 
       # - name: Auto approve
       #   if: steps.cpr.outputs.pull-request-operation == 'created'
