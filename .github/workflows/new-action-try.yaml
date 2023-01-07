@@ -87,6 +87,7 @@ jobs:
         uses: dflook/terraform-fmt@v1.29.1
 
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v4.2.3
         with:
           commit-message: updated terraform formatting
