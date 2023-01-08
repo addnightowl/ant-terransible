@@ -68,7 +68,7 @@ jobs:
       run: TFLINT_LOG=info tflint --init --config linting-configs/.tflint.hcl
 
     - name: Run TFLint
-      run: TFLINT_LOG=info tflint --config linting-configs/.tflint.hcl
+      run: tflint
         
   # Checkov
   Checkov:
