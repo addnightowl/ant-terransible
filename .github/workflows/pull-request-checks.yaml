@@ -1,9 +1,6 @@
-name: Linter Analysis
+name: Linter Analysis for PR
 
 on:
-  push:
-    branches:
-      - '**'
   pull_request:
     branches:
       - '**'
@@ -80,25 +77,3 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           config_file: linting-configs/.checkov.yaml
-
-  # Terraform Formatting
-  Terraform-Formatting:
-    name: Auto-Terraform Formatting
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-
-      - name: Run Terraform-Fmt Action
-        uses: dflook/terraform-fmt@v1.29.1
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4.2.3
-        with:
-          commit-message: updated terraform formatting
-          title: Reformated Terraform Files
-          body: Updated terraform files to canonical format using `terraform fmt`.
-          branch: automated-terraform-fmt
-          delete-branch: false
-          draft: false
-          labels: automated pr
