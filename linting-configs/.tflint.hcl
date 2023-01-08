@@ -15,7 +15,6 @@ plugin "terraform" {
 }
 
 
-
 # Disallow // comments in favor of #.
 rule "terraform_comment_syntax" {
   enabled = true # 0 issues found
@@ -28,7 +27,7 @@ rule "terraform_deprecated_index" {
 
 # Disallow deprecated (0.11-style) interpolation. [Recommended]
 rule "terraform_deprecated_interpolation" {
-  enabled = false # 1 error found
+  enabled = true # 1 error found
 }
 
 # Disallow output declarations without description.
@@ -43,17 +42,17 @@ rule "terraform_documented_variables" {
 
 # Disallow comparisons with [] when checking if a collection is empty. [Recommended]
 rule "terraform_empty_list_equality" {
-  enabled = false # 0 issues found
+  enabled = true # 0 issues found
 }
 
 # Disallow specifying a git or mercurial repository as a module source without pinning to a version. [Recommended]
 rule "terraform_module_pinned_source" {
-  enabled = false # 0 issues found
+  enabled = true # 0 issues found
 }
 
 # Checks that Terraform modules sourced from a registry specify a version. [Recommended]
 rule "terraform_module_version" {
-  enabled = false # 0 issues found
+  enabled = true # 0 issues found
 }
 
 # Enforces naming conventions
@@ -79,20 +78,20 @@ rule "terraform_standard_module_structure" {
 
 # Disallow variable declarations without type. [Recommended]
 rule "terraform_typed_variables" {
-  enabled = false  # 28 issues found
+  enabled = true  # 28 issues found
 }
 
 # Disallow variables, data sources, and locals that are declared but never used. [Recommended]
 rule "terraform_unused_declarations" {
-  enabled = false # 4 issues found
+  enabled = true # 4 issues found
 }
 
 # Check that all required_providers are used in the module.
 rule "terraform_unused_required_providers" {
-  enabled = false # 4 issues found
+  enabled = true # 4 issues found
 }
 
 # terraform.workspace should not be used with a "remote" backend with remote execution. [Recommended]
 rule "terraform_workspace_remote" {
-  enabled = false # 0 issues found
+  enabled = true # 0 issues found
 }
