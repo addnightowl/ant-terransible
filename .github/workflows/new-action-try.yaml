@@ -105,3 +105,4 @@ jobs:
           delete-branch: false
           draft: false
           labels: automated pr
+          assignee: addnightowl
