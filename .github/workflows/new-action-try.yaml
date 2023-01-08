@@ -1,49 +1,47 @@
-name: Linter Actions - Security and Compliance Analysis
+name: Linter Analysis
 
 on:
   push:
-    branches: [ dev, automated-terraform-fmt ]
+    branches:
+      - '**'
   pull_request:
-    branches: [ main ]
+    branches:
+      - '**'
 
 jobs:
 
   # Hadolint
   Hadolint:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-
+    name: Hadolint
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: hadolint/hadolint-action@v3.0.0
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Run Hadolint Action
+        uses: jbergstroem/hadolint-gh-action@v1.11.0
         with:
           dockerfile: Dockerfile
-          config: linting-configs/.hadolint.yaml
+          config_file: linting-configs/.hadolint.yaml
+          error_level: 1 # Fail CI based on hadolint output (-1: never, 0: error, 1: warning, 2: info)
 
   # ShellCheck
   ShellCheck:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-
+    name: ShellCheck
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run ShellCheck
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Run ShellCheck Action
         uses: ludeeus/action-shellcheck@master
+        with:
+          severity: error
 
   # TFLint
   TFLint:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-
+    name: TFLint
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
       name: Checkout Source Code
@@ -64,19 +62,15 @@ jobs:
       run: tflint --version
 
     - name: Init TFLint
-      run: tflint --init
+      run: TFLINT_LOG=info tflint --init --config linting-configs/.tflint.hcl
 
     - name: Run TFLint
-      run: tflint --config=linting-configs/.tflint.hcl
+      run: TFLINT_LOG=info tflint --config linting-configs/.tflint.hcl
         
   # Checkov
   Checkov:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-
+    name: Checkov
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -89,49 +83,22 @@ jobs:
 
   # Terraform Formatting
   Terraform-Formatting:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-
+    name: Auto-Terraform Formatting
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: terraform fmt
+      - name: Run Terraform-Fmt Action
         uses: dflook/terraform-fmt@v1.29.1
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.2.3
         with:
-          commit-message: terraform fmt
+          commit-message: updated terraform formatting
           title: Reformated Terraform Files
           body: Updated terraform files to canonical format using `terraform fmt`.
-          branch: main
+          branch: automated-terraform-fmt
           delete-branch: false
           draft: false
-
-  # # Terraform_Linter
-  # pre-commit:
-  #   runs-on: ${{ matrix.os }}
-
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest]
-
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-
-  #     - uses: pre-commit/action@v3.0.0
-  #       with:
-  #         extra_args: terraform_fmt --all-files
-
-  #     - uses: pre-commit/action@v3.0.0
-  #       with:
-  #         extra_args: terraform_validate
-
-  #     - uses: pre-commit/action@v3.0.0
-  #       with:
-  #         extra_args: terraform_tflint
+          labels: automated pr
