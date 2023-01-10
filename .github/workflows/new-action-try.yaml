@@ -10,6 +10,8 @@ on:
   branch_protection_rule:
     branches:
       - '**'
+  workflow_call:
+    
 
 jobs:
 
