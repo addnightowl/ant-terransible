@@ -60,7 +60,7 @@ jobs:
 
     - name: Run TFLint
       run: TFLINT_LOG=info tflint --config linting-configs/.tflint.hcl
- 
+
   # Checkov
   Checkov:
     name: Checkov
