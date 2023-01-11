@@ -1,6 +1,6 @@
 name: Linter Analysis
 
-on: [push, pull_request, branch_protection_rule ,workflow_call]
+on: [push, pull_request, workflow_call]
   # push:
   #   branches:
   #     - '**'
