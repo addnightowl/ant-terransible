@@ -1,15 +1,6 @@
 name: Linter Analysis
 
-on:
-  push:
-    branches:
-      - '**'
-  pull_request:
-    branches:
-      - '**'
-  branch_protection_rule:
-    branches:
-      - '**'
+on: [push, pull_request]
 
 jobs:
 
@@ -105,3 +96,12 @@ jobs:
           delete-branch: false
           draft: false
           labels: automated pr
+
+  tfsec:
+    name: tfsec
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@master
+      - name: tfsec
+        uses: aquasecurity/tfsec-action@v1.0.2
