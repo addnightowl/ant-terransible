@@ -1,0 +1,2 @@
+terraform plan -var-file main.tfvars -out plan.out
+docker run --rm -it -p 9000:9000 -v $(pwd):/src im2nguyen/rover -planPath plan.out

@@ -1,17 +1,6 @@
 name: Linter Analysis
 
-on: [push, pull_request, workflow_call]
-  # push:
-  #   branches:
-  #     - '**'
-  # pull_request:
-  #   branches:
-  #     - '**'
-  # branch_protection_rule:
-  #   branches:
-  #     - '**'
-  # workflow_call:
-    
+on: [push, pull_request, workflow_call, branch_protection_rule]
 
 jobs:
 
@@ -27,7 +16,7 @@ jobs:
         uses: jbergstroem/hadolint-gh-action@v1.11.0
         with:
           dockerfile: Dockerfile
-          config_file: .hadolint.yaml
+          config_file: linting-configs/.hadolint.yaml
           error_level: 1 # Fail CI based on hadolint output (-1: never, 0: error, 1: warning, 2: info)
 
   # ShellCheck
@@ -67,11 +56,11 @@ jobs:
       run: tflint --version
 
     - name: Init TFLint
-      run: TFLINT_LOG=info tflint --init --config .tflint.hcl
+      run: TFLINT_LOG=info tflint --init --config linting-configs/.tflint.hcl
 
     - name: Run TFLint
-      run: TFLINT_LOG=info tflint --config .tflint.hcl
-        
+      run: TFLINT_LOG=info tflint --config linting-configs/.tflint.hcl
+ 
   # Checkov
   Checkov:
     name: Checkov
@@ -84,27 +73,4 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          config_file: .checkov.yaml
-
-  # Terraform Formatting
-  Terraform-Formatting:
-    name: Auto-Terraform Formatting
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-
-      - name: Run Terraform-Fmt Action
-        uses: dflook/terraform-fmt@v1.29.1
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4.2.3
-        with:
-          commit-message: updated terraform formatting
-          title: Reformated Terraform Files
-          body: Updated terraform files to canonical format using `terraform fmt`.
-          branch: automated-terraform-fmt
-          delete-branch: false
-          draft: false
-          labels: automated pr
-          assignee: addnightowl
+          config_file: linting-configs/.checkov.yaml
