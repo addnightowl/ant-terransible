@@ -70,7 +70,7 @@ jobs:
       run: TFLINT_LOG=info tflint --init --config .tflint.hcl
 
     - name: Run TFLint
-      run: tflint --config .tflint.hcl
+      run: TFLINT_LOG=info tflint --config .tflint.hcl
         
   # Checkov
   Checkov:
