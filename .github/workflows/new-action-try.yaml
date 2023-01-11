@@ -1,15 +1,16 @@
 name: Linter Analysis
 
-on:
-  push:
-    branches:
-      - '**'
-  pull_request:
-    branches:
-      - '**'
-  branch_protection_rule:
-    branches:
-      - '**'
+on: [push, pull_request, workflow_call]
+  # push:
+  #   branches:
+  #     - '**'
+  # pull_request:
+  #   branches:
+  #     - '**'
+  # branch_protection_rule:
+  #   branches:
+  #     - '**'
+  # workflow_call:
 
 jobs:
 
@@ -95,13 +96,23 @@ jobs:
       - name: Run Terraform-Fmt Action
         uses: dflook/terraform-fmt@v1.29.1
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4.2.3
-        with:
-          commit-message: updated terraform formatting
-          title: Reformated Terraform Files
-          body: Updated terraform files to canonical format using `terraform fmt`.
-          branch: automated-terraform-fmt
-          delete-branch: false
-          draft: false
-          labels: automated pr
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v4.2.3
+      #   with:
+      #     commit-message: updated terraform formatting
+      #     title: Reformated Terraform Files
+      #     body: Updated terraform files to canonical format using `terraform fmt`.
+      #     branch: automated-terraform-fmt
+      #     delete-branch: false
+      #     draft: false
+      #     labels: automated pr
+
+  # tfsec
+  tfsec:
+    name: tfsec
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@master
+      - name: tfsec
+        uses: aquasecurity/tfsec-action@v1.0.2
