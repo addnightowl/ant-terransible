@@ -12,11 +12,11 @@ variable "access_ip" {
   default = "0.0.0.0/0"
 }
 
-# var.cloud9_ip
+/* # var.cloud9_ip
 variable "cloud9_ip" {
   type    = string
-  default = "52.21.53.148/32"
-}
+  default = "52.21.53.148/32" */
+/* } */
 
 # var.main_instance_type
 variable "main_instance_type" {
