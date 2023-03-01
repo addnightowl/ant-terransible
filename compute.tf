@@ -1,4 +1,4 @@
-# --- ant-terransible/compute.tf ---
+/* # --- ant-terransible/compute.tf ---
 
 data "aws_ami" "server_ami" {
   most_recent = true
@@ -82,4 +82,4 @@ output "instance_ips" {
 
 output "instance_ids" {
   value = [for i in aws_instance.ant_main[*] : i.id]
-}
+} */
