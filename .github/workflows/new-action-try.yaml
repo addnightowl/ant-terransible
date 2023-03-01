@@ -1,0 +1,76 @@
+name: Linter Analysis
+
+on: [push, pull_request]
+
+jobs:
+
+  # Hadolint
+  Hadolint:
+    name: Hadolint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Run Hadolint Action
+        uses: jbergstroem/hadolint-gh-action@v1.11.0
+        with:
+          dockerfile: Dockerfile
+          config_file: linting-configs/.hadolint.yaml
+          error_level: 1 # Fail CI based on hadolint output (-1: never, 0: error, 1: warning, 2: info)
+
+  # ShellCheck
+  ShellCheck:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Run ShellCheck Action
+        uses: ludeeus/action-shellcheck@master
+        with:
+          severity: error
+
+  # TFLint
+  TFLint:
+    name: TFLint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      name: Checkout Source Code
+
+    - uses: actions/cache@v3
+      name: Cache Plugin Dir
+      with:
+        path: ~/.tflint.d/plugins
+        key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
+
+    - uses: terraform-linters/setup-tflint@v3.0.0
+      name: Setup TFLint
+      with:
+        github_token: ${{ secrets.MY_CUSTOM_GITHUB_TOKEN }}
+        tflint_version: latest
+
+    - name: Show Version
+      run: tflint --version
+
+    - name: Init TFLint
+      run: TFLINT_LOG=info tflint --init --config linting-configs/.tflint.hcl
+
+    - name: Run TFLint
+      run: TFLINT_LOG=info tflint --config linting-configs/.tflint.hcl
+
+  # Checkov
+  Checkov:
+    name: Checkov
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Run Checkov Action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          config_file: linting-configs/.checkov.yaml
