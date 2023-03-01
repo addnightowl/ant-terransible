@@ -60,17 +60,3 @@ jobs:
 
     - name: Run TFLint
       run: TFLINT_LOG=info tflint --config linting-configs/.tflint.hcl
-
-  # Checkov
-  Checkov:
-    name: Checkov
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-
-      - name: Run Checkov Action
-        id: checkov
-        uses: bridgecrewio/checkov-action@master
-        with:
-          config_file: linting-configs/.checkov.yaml
