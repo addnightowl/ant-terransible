@@ -1,6 +1,10 @@
 name: Linter Analysis
 
-on: [push, pull_request, workflow_call, branch_protection_rule]
+# on: [push, pull_request, workflow_call]
+
+on:
+  push:
+    branches: ['*'] # '*' will cause the workflow to run for every push/commit to all branches.
 
 jobs:
 
